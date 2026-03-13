@@ -1,0 +1,43 @@
+{
+	"name": "create-faststack",
+	"version": "0.1.0",
+	"description": "Scaffold a pnpm monorepo with React 19 + FastAPI + Turbo + Biome + Docker in seconds",
+	"type": "module",
+	"bin": {
+		"create-faststack": "./dist/index.js"
+	},
+	"files": ["dist", "templates"],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check": "biome check .",
+		"typecheck": "tsc --noEmit"
+	},
+	"keywords": [
+		"create",
+		"scaffold",
+		"monorepo",
+		"react",
+		"fastapi",
+		"pnpm",
+		"turbo",
+		"biome",
+		"docker",
+		"fullstack"
+	],
+	"author": "prosdevlab",
+	"license": "MIT",
+	"dependencies": {
+		"@clack/prompts": "^0.10.0",
+		"commander": "^13.1.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^22.15.0",
+		"tsup": "^8.5.0",
+		"typescript": "~5.7.3"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+	}
+}

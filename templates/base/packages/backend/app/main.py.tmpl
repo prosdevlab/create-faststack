@@ -1,0 +1,31 @@
+"""{{PROJECT_NAME}} backend."""
+
+import logging
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.logging import setup_logging
+
+setup_logging()
+logger = logging.getLogger(__name__)
+
+app = FastAPI(title="{{PROJECT_NAME}}")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
+@app.get("/api/hello")
+async def hello():
+    return {"message": "Hello from {{PROJECT_NAME}} backend!"}

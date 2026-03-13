@@ -1,0 +1,32 @@
+# {{PROJECT_NAME}} — Architecture
+
+## Monorepo structure
+
+```
+{{PROJECT_NAME}}/
+├── packages/
+│   ├── frontend/   # React 19 + Vite + Tailwind + Zustand
+│   ├── shared/     # Shared TypeScript types and utilities
+│   └── backend/    # FastAPI + Pydantic (runs in Docker)
+├── docker-compose.yml       # Production
+├── docker-compose.dev.yml   # Development (hot reload)
+├── turbo.json               # Turborepo pipeline
+├── biome.json               # Linting + formatting (TS/JS)
+└── pnpm-workspace.yaml      # Workspace config
+```
+
+## Package managers
+- **pnpm** — JavaScript/TypeScript dependency management and workspace orchestration
+- **uv** — Python dependency management (replaces pip/poetry)
+- **Turborepo** — Build orchestration across packages
+
+## Docker setup
+- Development: `docker-compose.dev.yml` mounts `packages/backend` with hot reload
+- Production: `docker-compose.yml` builds from `packages/backend/Dockerfile`
+- Python deps install automatically via `uv sync` on container start
+
+## Layer rules
+Components (`packages/frontend/src/components/`) must not make API calls directly.
+They read from Zustand stores. Stores call the API layer. The API layer owns fetch logic.
+
+This is enforced via TypeScript path aliases — `tsc --noEmit` will fail if a component imports from `@api`.

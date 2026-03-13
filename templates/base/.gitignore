@@ -1,0 +1,10 @@
+node_modules
+dist
+.turbo
+*.tgz
+.DS_Store
+.env
+__pycache__
+.pytest_cache
+.ruff_cache
+.venv

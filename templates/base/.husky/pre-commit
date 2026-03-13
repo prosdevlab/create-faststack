@@ -1,0 +1,9 @@
+# Guard against committing .env files
+if git diff --cached --name-only | grep -q '\.env$'; then
+  echo "ERROR: Attempting to commit .env file. Remove it from staging."
+  exit 1
+fi
+
+npx lint-staged
+
+pnpm typecheck

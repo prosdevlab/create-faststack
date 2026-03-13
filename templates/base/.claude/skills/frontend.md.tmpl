@@ -1,0 +1,26 @@
+# {{PROJECT_NAME}} — Frontend
+
+## Stack
+- **React 19** with functional components and hooks
+- **Zustand** for state management (slice pattern)
+- **Tailwind CSS v4** for styling
+- **Vite** for bundling and dev server
+
+## Path aliases
+| Alias | Maps to |
+|-------|---------|
+| `@store` | `src/store/` |
+| `@ui` | `src/components/ui/` |
+| `@shared` | `{{NAMESPACE}}/shared` |
+| `@api` | `src/api/` |
+
+## Patterns
+- Components import from `@store` and `@ui` only
+- Stores import from `@api` for data fetching
+- API layer uses the base `client.ts` fetch wrapper
+- Use `useApi` hook for simple data fetching in components
+
+## Development
+- `pnpm dev` starts Vite on http://localhost:5173
+- API requests proxy to http://localhost:8000 via Vite config
+- Hot module replacement enabled by default

@@ -1,0 +1,39 @@
+{
+	"name": "{{PROJECT_NAME}}",
+	"private": true,
+	"description": "{{DESCRIPTION}}",
+	"packageManager": "pnpm@{{PNPM_VERSION}}",
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"dev": "concurrently --names frontend,backend --prefix-colors blue,green \"pnpm --filter {{NAMESPACE}}/frontend dev\" \"docker compose -f docker-compose.dev.yml up\"",
+		"build": "turbo run build",
+		"typecheck": "turbo run typecheck",
+		"check": "biome check .",
+		"verify": "concurrently --names ts,py --prefix-colors blue,green \"pnpm verify:ts\" \"pnpm verify:py\"",
+		"verify:ts": "turbo run typecheck && biome check .",
+		"verify:py": "cd packages/backend && uv run ruff check app/ tests/ && uv run ruff format --check app/ tests/ && uv run pytest tests/unit/",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@commitlint/cli": "^20.4.4",
+		"@commitlint/config-conventional": "^20.4.4",
+		"concurrently": "^9.1.2",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.3.3",
+		"turbo": "^2.4.4",
+		"typescript": "~5.7.3"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx,json,css}": ["biome check --write --no-errors-on-unmatched"],
+		"packages/backend/**/*.py": [
+			"uv run --directory packages/backend ruff check --fix",
+			"uv run --directory packages/backend ruff format"
+		]
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+	}
+}

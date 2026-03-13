@@ -1,0 +1,18 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"outDir": "dist",
+		"rootDir": "src",
+		"composite": true,
+		"baseUrl": ".",
+		"paths": {
+			"@store/*": ["src/store/*"],
+			"@ui/*": ["src/components/ui/*"],
+			"@shared": ["../../packages/shared/src/index.ts"],
+			"@api/*": ["src/api/*"]
+		}
+	},
+	"include": ["src"],
+	"references": [{ "path": "../shared" }]
+}

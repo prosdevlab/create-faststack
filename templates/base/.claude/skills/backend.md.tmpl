@@ -1,0 +1,40 @@
+# {{PROJECT_NAME}} — Backend
+
+## Stack
+- **FastAPI** — async Python web framework
+- **Pydantic** — data validation and settings
+- **uvicorn** — ASGI server
+- **uv** — dependency management
+
+## Structure
+```
+packages/backend/
+├── app/
+│   ├── __init__.py
+│   ├── main.py       # FastAPI app, CORS, routes
+│   └── logging.py    # Structured JSON logging
+├── tests/
+│   └── unit/
+├── pyproject.toml    # Dependencies and tool config
+├── uv.lock           # Committed lock file
+└── Dockerfile        # Production image
+```
+
+## Running
+- Always run inside Docker: `docker compose -f docker-compose.dev.yml up`
+- Never run FastAPI directly on the host
+- `uv sync` runs automatically in the container
+
+## Testing
+- `uv run pytest tests/unit/` for unit tests
+- `uv run ruff check app/ tests/` for linting
+- `uv run ruff format --check app/ tests/` for format checking
+
+## Adding dependencies
+```bash
+# Add a runtime dependency
+cd packages/backend && uv add <package>
+
+# Add a dev dependency
+cd packages/backend && uv add --group dev <package>
+```
