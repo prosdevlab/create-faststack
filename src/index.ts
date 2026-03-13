@@ -6,7 +6,7 @@ import { scaffold } from "./scaffold.js";
 import { detectPnpmVersion, toKebabCase, validateProjectName } from "./utils.js";
 
 const program = new Command()
-	.name("create-faststack")
+	.name("create-faststack-app")
 	.description("Scaffold a pnpm monorepo with React 19 + FastAPI + Turbo + Biome + Docker")
 	.argument("[project-name]", "Name for the new project")
 	.option("--namespace <namespace>", "Package namespace (e.g. @myapp)")

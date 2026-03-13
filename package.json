@@ -1,10 +1,10 @@
 {
-	"name": "create-faststack",
+	"name": "create-faststack-app",
 	"version": "0.1.0",
 	"description": "Scaffold a pnpm monorepo with React 19 + FastAPI + Turbo + Biome + Docker in seconds",
 	"type": "module",
 	"bin": {
-		"create-faststack": "./dist/index.js"
+		"create-faststack-app": "./dist/index.js"
 	},
 	"files": ["dist", "templates"],
 	"scripts": {

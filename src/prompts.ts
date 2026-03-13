@@ -8,7 +8,7 @@ export interface ProjectOptions {
 }
 
 export async function runPrompts(defaults?: Partial<ProjectOptions>): Promise<ProjectOptions> {
-	p.intro("create-faststack");
+	p.intro("create-faststack-app");
 
 	const name =
 		defaults?.name ??
